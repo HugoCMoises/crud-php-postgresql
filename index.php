@@ -9,56 +9,49 @@ include 'includes/header.php'; // inclui o cabeçalho comum
 
 ?>
 
-<div class="w-full bg-white rounded-lg shadow-md p-6 my-auto">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Lista de Produtos</h2>
-        <a href="create.php"
-            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition flex items-center gap-2">
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Lista de Produtos</h2>
+        <a href="create.php" class="btn btn-success">
             <i class="fa-solid fa-plus"></i> Novo Produto
         </a>
     </div>
 
-    <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
+    <div class="table-container">
+        <table class="table-modern">
             <thead>
-                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-left">ID</th>
-                    <th class="py-3 px-6 text-left">Nome</th>
-                    <th class="py-3 px-6 text-left">Preço</th>
-                    <th class="py-3 px-6 text-center">Ações</th>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th class="text-center">Ações</th>
                 </tr>
             </thead>
-            <tbody class="text-gray-600 text-sm font-light">
+            <tbody>
                 <?php foreach ($listaProdutos as $produto): ?>
-                    <tr class="border-b border-gray-200 hover:bg-gray-100 transition">
-                        <td class="py-3 px-6 text-left whitespace-nowrap font-medium"><?php echo $produto['id']; ?></td>
-                        <td class="py-3 px-6 text-left"><?php echo htmlspecialchars($produto['nome']); ?></td>
-                        <td class="py-3 px-6 text-left font-bold text-green-600">R$
-                            <?php echo number_format($produto['preco'], 2, ',', '.'); ?>
-                        </td>
-                        <td class="py-3 px-6 text-center">
-                            <div class="flex item-center justify-center gap-2">
-                                <a href="update.php?id=<?php echo $produto['id']; ?>"
-                                    class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-1 px-3 rounded text-xs transition"
-                                    title="Editar">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
-                                <a href="delete.php?id=<?php echo $produto['id']; ?>"
-                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded text-xs transition"
-                                    onclick="return confirm('Tem certeza que deseja excluir este produto?');"
-                                    title="Excluir">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </div>
+                    <tr>
+                        <td><?php echo $produto['id']; ?></td>
+                        <td><?php echo htmlspecialchars($produto['nome']); ?></td>
+                        <td class="text-price">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></td>
+                        <td class="text-center">
+                            <a href="update.php?id=<?php echo $produto['id']; ?>" class="btn btn-warning btn-sm"
+                                title="Editar">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                            <a href="delete.php?id=<?php echo $produto['id']; ?>" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Tem certeza que deseja excluir este produto?');" title="Excluir">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
 
                 <?php if (empty($listaProdutos)): ?>
                     <tr>
-                        <td colspan="4" class="py-6 text-center text-gray-500">
-                            <i class="fa-solid fa-box-open text-4xl mb-2 block text-gray-300"></i>
-                            Nenhum produto encontrado.
+                        <td colspan="4" class="text-center" style="padding: 3rem;">
+                            <i class="fa-solid fa-box-open"
+                                style="font-size: 3rem; color: var(--text-muted); display: block; margin-bottom: 1rem; margin-left: auto; margin-right: auto;"></i>
+                            <span style="color: var(--text-muted);">Nenhum produto encontrado.</span>
                         </td>
                     </tr>
                 <?php endif; ?>
