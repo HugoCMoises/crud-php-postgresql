@@ -3,7 +3,7 @@
 $host = 'localhost';
 $db = 'teste';
 $user = 'postgres';
-$pass = 'sua_senha';
+$pass = '123456';
 $port = '5432'; // porta padrão do PostgreSQL
 
 
